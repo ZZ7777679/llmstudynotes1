@@ -1,3 +1,4 @@
+github-push-troubleshooting.md
 __pycache__/
 venv/
 LLM-Algo-LeetCode-网页文档/contributing.md
@@ -203,3 +204,4 @@ llm-algo-leetcode-main/docs/chapter2/chapter2_1.md
 llm-algo-leetcode-main/docs/chapter2/chapter2_2.md
 llm-algo-leetcode-main/docs/public/datawhale-logo.png
 llm-algo-leetcode-main/docs/public/learning.GIF
+.claude/settings.json
