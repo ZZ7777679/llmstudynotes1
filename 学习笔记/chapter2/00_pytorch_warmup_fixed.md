@@ -86,7 +86,7 @@ $$ \frac{\partial L}{\partial y_i} $$
 
 $$ \frac{\partial L}{\partial W_{i,j}},\frac{\partial L}{\partial \mathbf{b}_j},\frac{\partial L}{\partial x_i},\frac{\partial L}{\partial z_j} $$
 
-**1. 求 $\frac{\partial L}{\partial z_j}$**
+#### 1. 求 $\frac{\partial L}{\partial z_j}$
 
 $$ \frac{\partial L}{\partial z_j} = \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial z_j} $$
 
@@ -98,7 +98,7 @@ ReLU函数的导数在小于等于0时，导数为0；大于0时，导数为1
 
 $$ \frac{\partial L}{\partial \mathbf{z}}= \frac{\partial L}{\partial \mathbf{y}} \cdot \text{mask}$$
 
-**2. 求 $\frac{\partial L}{\partial b_j}$**
+#### 2. 求 $\frac{\partial L}{\partial b_j}$
 
 $$ \frac{\partial L}{\partial b_j}=\frac{\partial L}{\partial z_j}\cdot \frac{\partial z_j}{\partial b_j}=\frac{\partial L}{\partial z_j} $$
 
@@ -116,7 +116,7 @@ grad_bias = grad_z.sum(dim=0)
 
 因为广播实际是在第0个维度进行的
 
-**3. 求 $\frac{\partial L}{\partial W_{i,j}}$**
+#### 3. 求 $\frac{\partial L}{\partial W_{i,j}}$
 
 $$ \frac{\partial L}{\partial W_{i,j}} = \frac{\partial L}{\partial z_j}\cdot\frac{\partial z_j}{\partial W_{i,j}} $$
 
@@ -146,7 +146,7 @@ grad_weight = grad_z.T @ x
 
 这里为了体现$\mathbf{z}$的维度数临时写作$\mathbf{Z}$
 
-**4. 求 $\frac{\partial L}{\partial x_i}$**
+#### 4. 求 $\frac{\partial L}{\partial x_i}$
 
 这一部分跟上面对权重求导类似，这里省略推导了
 
