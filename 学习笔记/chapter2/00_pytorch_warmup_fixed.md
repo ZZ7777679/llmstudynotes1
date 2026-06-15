@@ -67,7 +67,7 @@ einops的优势
 
 中间结果利用ctx对象保存在GPU显存中(VRAM)
 
-保存中间结果的原因是**用空间换时间**，一般来说存小结果如mask而不存结果$\mathbf{z}$
+保存中间结果的原因是**用空间换时间**，一般来说存小结果如mask而不存结果 $\mathbf{z}$
 
 <a id="back-propagation"></a>
 ### 反向传播
@@ -90,11 +90,11 @@ $$ \frac{\partial L}{\partial W_{i,j}},\frac{\partial L}{\partial \mathbf{b}_j},
 
 $$ \frac{\partial L}{\partial z_j} = \frac{\partial L}{\partial y_i} \cdot \frac{\partial y_i}{\partial z_j} $$
 
-而ReLU函数的在$\mathbf{z}_j$小于等于0时，输出全为0，而大于0时保持原样输出
+而ReLU函数的在 $\mathbf{z}_j$ 小于等于0时，输出全为0，而大于0时保持原样输出
 
 ReLU函数的导数在小于等于0时，导数为0；大于0时，导数为1
 
-将下标拓展到整个$\mathbf{z}$实际上可以用前向传播保存的mask来计算
+将下标拓展到整个 $\mathbf{z}$ 实际上可以用前向传播保存的mask来计算
 
 $$ \frac{\partial L}{\partial \mathbf{z}}= \frac{\partial L}{\partial \mathbf{y}} \cdot \text{mask}$$
 
@@ -102,7 +102,7 @@ $$ \frac{\partial L}{\partial \mathbf{z}}= \frac{\partial L}{\partial \mathbf{y}
 
 $$ \frac{\partial L}{\partial b_j}=\frac{\partial L}{\partial z_j}\cdot \frac{\partial z_j}{\partial b_j}=\frac{\partial L}{\partial z_j} $$
 
-注意偏置$\mathbf{b}$的维度需要对齐$\mathbf{x}\mathbf{W}^T$，所以需要将$\mathbf{b}$沿着batch方向广播到所有维度，对$\mathbf{b}$来说，它的维度从$(d_{out})$变更为$(N,d_{out})$
+注意偏置 $\mathbf{b}$ 的维度需要对齐 $\mathbf{x}\mathbf{W}^T$，所以需要将 $\mathbf{b}$ 沿着batch方向广播到所有维度，对 $\mathbf{b}$ 来说，它的维度从 $(d_{out})$ 变更为 $(N,d_{out})$
 
 我们最终计算导数也需要考虑广播，所以
 
@@ -122,11 +122,11 @@ $$ \frac{\partial L}{\partial W_{i,j}} = \frac{\partial L}{\partial z_j}\cdot\fr
 
 $$ z_j = \sum_kx_kW_{k,j} + b_j $$
 
-所以$\frac{\partial z_j}{\partial W_{i,j}}=x_i$，带入可得
+所以 $\frac{\partial z_j}{\partial W_{i,j}}=x_i$，带入可得
 
 $$ \frac{\partial L}{\partial W_{i,j}} = \frac{\partial L}{\partial z_j} \cdot x_i $$
 
-当样本数为$N$时我们有
+当样本数为 $N$ 时我们有
 
 $$ \frac{\partial L}{\partial W_{i,j}}=\sum_n\frac{\partial L}{\partial Z_{n,j}}\cdot \mathbf{X}_{n,i} $$
 
@@ -144,7 +144,7 @@ $$ \frac{\partial L}{\partial W} = \left( \frac{\partial L}{\partial Z}\right)^T
 grad_weight = grad_z.T @ x
 ```
 
-这里为了体现$\mathbf{z}$的维度数临时写作$\mathbf{Z}$
+这里为了体现 $\mathbf{z}$ 的维度数临时写作 $\mathbf{Z}$
 
 #### 4. 求 $\frac{\partial L}{\partial x_i}$
 
