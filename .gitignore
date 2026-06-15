@@ -208,3 +208,6 @@ llm-algo-leetcode-main/docs/public/learning.GIF
 fix_github_md.py
 .gitignore
 .gitignore
+补充材料/PyTorch工业级教程规划.md
+.codex/config.toml
+补充材料/PyTorch与LLM核心算法技术主线教程规划.md
