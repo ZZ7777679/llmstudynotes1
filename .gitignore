@@ -205,3 +205,6 @@ llm-algo-leetcode-main/docs/chapter2/chapter2_2.md
 llm-algo-leetcode-main/docs/public/datawhale-logo.png
 llm-algo-leetcode-main/docs/public/learning.GIF
 .claude/settings.json
+fix_github_md.py
+.gitignore
+.gitignore
