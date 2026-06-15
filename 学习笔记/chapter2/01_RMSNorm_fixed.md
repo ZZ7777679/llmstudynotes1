@@ -36,8 +36,8 @@ $$ \mathbf{LN}\left(x\right) = \frac{x-\mu}{\sqrt{\sigma^2+\epsilon}}\cdot\gamma
 $$ \mu=\frac{1}{d}\sum_{i=1}^dx_i \quad , \quad \sigma=\sqrt{\frac{1}{d}\sum_{i=1}^d(x_i-\mu)^2+\epsilon} $$
 
 假设特征维度为d，计算运算次数，则
-对于LayerNorm，总计算开销约为 $ 8d+O(1) $
-对于RMSNorm，总计算开销约为 $ 4d+O(1) $
+对于LayerNorm，总计算开销约为 $8d+O(1)$
+对于RMSNorm，总计算开销约为 $4d+O(1)$
 
 可以得到结论：RMSNorm计算开销是LayerNorm的一半左右
 
