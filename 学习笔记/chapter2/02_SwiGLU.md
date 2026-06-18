@@ -82,7 +82,7 @@ $$ \text{FFN}_{\text{SwiGLU}} \left( x \right) = W_{Down} \cdot \left( \text{SiL
 
 ### 决策与信息解析解耦
 SwiGLU的门控信号来自 $ x W_{gate} $ ，而数值内容来自 $ x W_{Up} $
-而 $ x W_{gate} $ 和 $ x W_{Up} $ 是相互独立的权重矩阵
+而 $ W_{gate} $ 和 $ W_{Up} $ 是相互独立的权重矩阵
 这代表着路由决策与信息解析两件事情解耦了，可以独立优化
 
 ### 综合不同特征维度的门控信号

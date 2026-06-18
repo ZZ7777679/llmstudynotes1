@@ -1,22 +1,22 @@
 # SwiGLU
 
 - [SwiGLU](#swiglu)
-  - [Swish激活函数](#swish)
-  - [GLU(门控线性单元)](#glu)
+  - [Swish激活函数](#swish激活函数)
+  - [GLU(门控线性单元)](#glu门控线性单元)
   - [SwiGLU](#swiglu-1)
-  - [SwiGLU深入](#swiglu)
-    - [路由规则](#section)
-    - [数据依赖](#section-1)
-    - [决策与信息解析解耦](#section-2)
-    - [综合不同特征维度的门控信号](#section-3)
-    - [更强的数学表达能力](#section-4)
-    - [更健康的梯度流](#section-5)
-  - [SwiGLU的参数量对齐](#swiglu-1)
-    - [原始FFN层参数量](#ffn)
-    - [含SwiGLU的FFN层参数量](#swiglu-2)
-  - [工业级实现与性能陷阱](#section-6)
-    - [张量并行与内存对齐](#section-7)
-    - [访存瓶颈与算子融合](#section-8)
+  - [SwiGLU深入](#swiglu深入)
+    - [路由规则](#路由规则)
+    - [数据依赖](#数据依赖)
+    - [决策与信息解析解耦](#决策与信息解析解耦)
+    - [综合不同特征维度的门控信号](#综合不同特征维度的门控信号)
+    - [更强的数学表达能力](#更强的数学表达能力)
+    - [更健康的梯度流](#更健康的梯度流)
+  - [SwiGLU的参数量对齐](#swiglu的参数量对齐)
+    - [原始FFN层参数量](#原始ffn层参数量)
+    - [含SwiGLU的FFN层参数量](#含swiglu的ffn层参数量)
+  - [工业级实现与性能陷阱](#工业级实现与性能陷阱)
+    - [张量并行与内存对齐](#张量并行与内存对齐)
+    - [访存瓶颈与算子融合](#访存瓶颈与算子融合)
 
 <a id="swish"></a>
 ## Swish激活函数
@@ -88,7 +88,7 @@ $$ \text{FFN}_{\text{SwiGLU}} \left( x \right) = W_{Down} \cdot \left( \text{SiL
 <a id="section-2"></a>
 ### 决策与信息解析解耦
 SwiGLU的门控信号来自 $x W_{gate}$，而数值内容来自 $x W_{Up}$
-而 $x W_{gate}$ 和 $x W_{Up}$ 是相互独立的权重矩阵
+而 $W_{gate}$ 和 $W_{Up}$ 是相互独立的权重矩阵
 这代表着路由决策与信息解析两件事情解耦了，可以独立优化
 
 <a id="section-3"></a>
