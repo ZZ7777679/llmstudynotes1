@@ -149,7 +149,7 @@ $$
 + 旋转，位置变换矩阵行列式值为1
 + 镜像反射，位置变换行列式值为-1
 
-当位置为0时，显然此时没有附加位置编码，$\mathbf{T}_0=\mathbf{I}$，其行列式值为1
+当位置为0时，显然此时没有附加位置编码， $\mathbf{T}_0=\mathbf{I}$ ，其行列式值为1
 
 当位置参数 $m$ 变化时，矩阵元素随着 $m$ 连续变化，所以位置变换矩阵的行列式也是连续的
 
@@ -163,7 +163,7 @@ $$
 
 那么我们假设旋转角度为 $\phi\left(m\right)$，那么 $\mathbf{T}_m$ 旋转了 $\phi\left(m\right)$ 弧度
 
-由 $\mathbf{T}_m^T\mathbf{T}_n=\mathbf{R}_{m-n}$ 可知，而左侧 $\mathbf{T}_m^T$ 的几何意义为 $\mathbf{T}_m$ 的反向旋转操作，这个等式说明左侧只依赖于 $m-n$，即
+由 $\mathbf{T}_m^\top\mathbf{T}_n=\mathbf{R}_{m-n}$ 可知，而左侧 $\mathbf{T}_m^\top$ 的几何意义为 $\mathbf{T}_m$ 的反向旋转操作，这个等式说明左侧只依赖于 $m-n$，即
 
 $$
 \phi\left(n\right)-\phi\left(m\right)=g\left(m-n\right)
@@ -265,9 +265,9 @@ $$
  \langle \mathbf{q}, \mathbf{k} \rangle = \text{Re}\big(q \cdot \overline{k}\big) 
 $$
 
-其中 $\overline{k}$ 表示 $k$ 的共轭复数（即虚部取反），$\text{Re}$ 表示取结果的实部。
+其中 $\overline{k}$ 表示 $k$ 的共轭复数（即虚部取反）， $\operatorname{Re}$ 表示取结果的实部。
 
-验证：设 $q = a+bi$，$k = c+di$，则 $q \cdot \overline{k} = (a+bi)(c-di) = (ac+bd) + i(bc - ad)$，其实部正好是 $ac+bd$，完美对应实数向量的点积公式。
+验证：设 $q = a+bi$， $k = c+di$，则 $q \cdot \overline{k} = (a+bi)(c-di) = (ac+bd) + i(bc - ad)$，其实部正好是 $ac+bd$，完美对应实数向量的点积公式。
 
 <a id="rope-relativity"></a>
 #### 复平面中RoPE的相对性
@@ -309,13 +309,17 @@ $$
 合并指数部分：
 
 $$
- \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( q \cdot \overline{k} \cdot e^{i(m-n)\theta} \Big) \tag{1} 
+\langle \mathbf{q}_m, \mathbf{k}_n \rangle
+= \operatorname{Re}\!\left(q \cdot \overline{k} \cdot e^{i(m-n)\theta}\right)
+\qquad \text{(1)}
 $$
 
 令 $S = q \cdot \overline{k}$（这是一个固定的复数，与位置无关），则最终结果为：
 
 $$
- \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( S \cdot e^{i(m-n)\theta} \Big) \tag{2} 
+\langle \mathbf{q}_m, \mathbf{k}_n \rangle
+= \operatorname{Re}\!\left(S \cdot e^{i(m-n)\theta}\right)
+\qquad \text{(2)}
 $$
 
 这样可以得到结论：公式 (2) 中，位置信息仅以 $(m-n)$ 的差值形式出现，而不再含有单独的 $m$ 或 $n$。也就是说，**绝对位置被消除，内积只依赖于相对距离**——这也是旋转位置编码设计的核心
@@ -325,7 +329,7 @@ $$
 
 公式 (2) 的几何含义非常直观，可以分两层理解：
 
-- 第一层：$S = q \cdot \overline{k}$ 包含了原始向量之间的夹角信息（即没有位置编码时的内积）。
+- 第一层： $S = q \cdot \overline{k}$ 包含了原始向量之间的夹角信息（即没有位置编码时的内积）。
 - 第二层：乘以 $e^{i(m-n)\theta}$ 相当于在原始夹角的基础上，额外增加了一个大小为 $(m-n)\theta$ 的相位偏移。
 
 换句话说：
