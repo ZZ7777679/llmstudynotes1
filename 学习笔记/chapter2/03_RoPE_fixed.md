@@ -262,10 +262,10 @@ $$
 在复数域中，如果我们设这两个向量对应的复数为 $q$ 和 $k$，则该内积等价于：
 
 $$
- \langle \mathbf{q}, \mathbf{k} \rangle = \text{Re}\big(q \cdot \overline{k}\big) 
+ \langle \mathbf{q}, \mathbf{k} \rangle = \mathrm{Re}\big(q \cdot \overline{k}\big) 
 $$
 
-其中 $\overline{k}$ 表示 $k$ 的共轭复数（即虚部取反）， $\operatorname{Re}$ 表示取结果的实部。
+其中 $\overline{k}$ 表示 $k$ 的共轭复数（即虚部取反）， $\mathrm{Re}$ 表示取结果的实部。
 
 验证：设 $q = a+bi$， $k = c+di$，则 $q \cdot \overline{k} = (a+bi)(c-di) = (ac+bd) + i(bc - ad)$，其实部正好是 $ac+bd$，完美对应实数向量的点积公式。
 
@@ -291,26 +291,26 @@ $$
 我们关心的是注意力机制中的内积 $\langle \mathbf{q}_m, \mathbf{k}_n \rangle$，它在复数域中写作：
 
 $$
- \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\big( q_m \cdot \overline{k_n} \big) 
+ \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \mathrm{Re}\big( q_m \cdot \overline{k_n} \big) 
 $$
 
 将 $q_m$ 和 $k_n$ 代入：
 
 $$
- \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( \big(q \cdot e^{im\theta}\big) \cdot \overline{\big(k \cdot e^{in\theta}\big)} \Big) 
+ \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \mathrm{Re}\Big( \big(q \cdot e^{im\theta}\big) \cdot \overline{\big(k \cdot e^{in\theta}\big)} \Big) 
 $$
 
 由于共轭运算将指数取反（即 $\overline{e^{in\theta}} = e^{-in\theta}$），上式变为：
 
 $$
- \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( q \cdot e^{im\theta} \cdot \overline{k} \cdot e^{-in\theta} \Big) 
+ \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \mathrm{Re}\Big( q \cdot e^{im\theta} \cdot \overline{k} \cdot e^{-in\theta} \Big) 
 $$
 
 合并指数部分：
 
 $$
 \langle \mathbf{q}_m, \mathbf{k}_n \rangle
-= \operatorname{Re}\!\left(q \cdot \overline{k} \cdot e^{i(m-n)\theta}\right)
+= \mathrm{Re}\!\left(q \cdot \overline{k} \cdot e^{i(m-n)\theta}\right)
 \qquad \text{(1)}
 $$
 
@@ -318,7 +318,7 @@ $$
 
 $$
 \langle \mathbf{q}_m, \mathbf{k}_n \rangle
-= \operatorname{Re}\!\left(S \cdot e^{i(m-n)\theta}\right)
+= \mathrm{Re}\!\left(S \cdot e^{i(m-n)\theta}\right)
 \qquad \text{(2)}
 $$
 
