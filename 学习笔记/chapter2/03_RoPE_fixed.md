@@ -36,9 +36,9 @@ Transformer的自注意力本质上是计算两两向量的点积
 
 绝对位置编码给每一个位置 $m$ 分配一个唯一的向量 $\mathbf{p}_m$，如最经典的正弦编码
 
-$
+$$
 \mathbf{PE}_{\left(m,2i\right)}=\sin \left(\frac{m}{10000^{\frac{2i}{d}}}\right),\quad  \mathbf{PE}_{\left(m,2i+1\right)}=\cos \left(\frac{m}{10000^{\frac{2i}{d}}}\right)
-$
+$$
 
 但是绝对位置编码有两个问题
 
@@ -71,9 +71,9 @@ $
 
 在RoPE之前提出了一种相对位置偏置的位置编码，思路是在计算注意力分数时额外配置一个依赖距离的偏置项
 
-$
+$$
  \text{Score} = \mathbf{q}_m \cdot \mathbf{k}_n + b_{m-n} 
-$
+$$
 
 但是相对位置会随着当前总长度的变化而变化，这样每一次生成新词时都需要遍历整个KV cache，动态地计算新的偏置矩阵b
 
@@ -103,38 +103,38 @@ $
 
 设原始查询向量为 $\mathbf{q}$，键向量为 $\mathbf{k}$，经过位置编码后得到：
 
-$
+$$
 \mathbf{q}_m=\mathbf{T}_m\mathbf{q},\quad\mathbf{k}_n=\mathbf{T}_n\mathbf{k}
-$
+$$
 
 而我们的要求是这个变换需要满足：
 
-$
+$$
 \langle\mathbf{q}_m,\mathbf{k}_n\rangle=\langle\mathbf{T}_m\mathbf{q},\mathbf{T}_n\mathbf{k}\rangle=g\left(m-n\right)
-$
+$$
 
 将内积展开为矩阵乘法形式可得：
 
-$
+$$
 \langle\mathbf{T}_m\mathbf{q},\mathbf{T}_n\mathbf{k}\rangle=\mathbf{q}^T\left(\mathbf{T}_m^T\mathbf{T}_n\right)\mathbf{k}
-$
+$$
 
 由于上式子对任意 $\mathbf{q},\mathbf{k}$ 都成立，而等式右边 $g\left(m-n\right)$ 依赖于 $m-n$，所以中间矩阵 $\mathbf{T}_m^T\mathbf{T}_n$ 也依赖于 $m-n$
 
 所以必然存在一个矩阵序列 $\mathbf{R}_{\Delta}$ 使得
 
-$
+$$
 \mathbf{T}_m^T\mathbf{T}_n=\mathbf{R}_{m-n}
-$
+$$
 
 
 这个矩阵序列的意义是描述两个不同位置编码函数之间相互作用的结果
 
 当 $m=n$ 时，我们可以得到
 
-$
+$$
 \mathbf{T}_m^T\mathbf{T}_m=\mathbf{R}_0
-$
+$$
 
 而左侧向量与自身的内积数学计算结果应为模长的平方，而它的意义是变换 $\mathbf{T}_m$ 对向量模长的影响
 
@@ -165,9 +165,9 @@ $
 
 由 $\mathbf{T}_m^T\mathbf{T}_n=\mathbf{R}_{m-n}$ 可知，而左侧 $\mathbf{T}_m^T$ 的几何意义为 $\mathbf{T}_m$ 的反向旋转操作，这个等式说明左侧只依赖于 $m-n$，即
 
-$
+$$
 \phi\left(n\right)-\phi\left(m\right)=g\left(m-n\right)
-$
+$$
 
 取 $m=0$ 得 $\phi\left(n\right)-\phi\left(0\right)=g\left(-n\right)$
 
@@ -195,9 +195,9 @@ $$
 
 在二维平面中，我们将向量 $(x, y)$ 映射为一个复数：
 
-$
+$$
  \mathbf{v} = (x, y) \quad \longleftrightarrow \quad z = x + iy 
-$
+$$
 
 其中 $i^2 = -1$。
 
@@ -208,43 +208,43 @@ $
 
 我们已知位置 $m$ 的变换矩阵为：
 
-$
+$$
  \mathbf{T}_m = \begin{pmatrix} \cos(m\theta) & -\sin(m\theta) \\ \sin(m\theta) & \cos(m\theta) \end{pmatrix} 
-$
+$$
 
 将一个向量 $(x, y)$ 左乘 $\mathbf{T}_m$，得到旋转后的坐标 $(x', y')$：
 
-$
+$$
  x' = x\cos(m\theta) - y\sin(m\theta) 
-$
+$$
 
-$
+$$
  y' = x\sin(m\theta) + y\cos(m\theta) 
-$
+$$
 
 构造对应的复数 $z' = x' + iy'$：
 
-$
+$$
  z' = \big[x\cos(m\theta) - y\sin(m\theta)\big] + i\big[x\sin(m\theta) + y\cos(m\theta)\big] 
-$
+$$
 
 提取公因式并整理：
 
-$
+$$
  z' = x\big[\cos(m\theta) + i\sin(m\theta)\big] + y\big[-\sin(m\theta) + i\cos(m\theta)\big] 
-$
+$$
 
 由于 $i \cdot i = -1$，我们可以将第二项的系数改写为 $i y$ 乘以 $(\cos + i\sin)$，即：
 
-$
+$$
  z' = (x + iy)\big[\cos(m\theta) + i\sin(m\theta)\big] 
-$
+$$
 
 根据欧拉公式 $e^{i\phi} = \cos\phi + i\sin\phi$，得到：
 
-$
+$$
  z' = z \cdot e^{im\theta} 
-$
+$$
 
 几何意义：复数乘法天然就是“旋转 + 缩放”
 
@@ -255,15 +255,15 @@ $
 
 在实数空间中，两个向量 $\mathbf{q}$ 和 $\mathbf{k}$ 的内积（点积）定义为：
 
-$
+$$
  \langle \mathbf{q}, \mathbf{k} \rangle = q_x k_x + q_y k_y 
-$
+$$
 
 在复数域中，如果我们设这两个向量对应的复数为 $q$ 和 $k$，则该内积等价于：
 
-$
+$$
  \langle \mathbf{q}, \mathbf{k} \rangle = \text{Re}\big(q \cdot \overline{k}\big) 
-$
+$$
 
 其中 $\overline{k}$ 表示 $k$ 的共轭复数（即虚部取反），$\text{Re}$ 表示取结果的实部。
 
@@ -278,45 +278,45 @@ $
 
 - 位置 $m$ 的查询复数为：
 
-$
+$$
  q_m = q \cdot e^{im\theta} 
-$
+$$
 
 - 位置 $n$ 的键复数为：
 
-$
+$$
  k_n = k \cdot e^{in\theta} 
-$
+$$
 
 我们关心的是注意力机制中的内积 $\langle \mathbf{q}_m, \mathbf{k}_n \rangle$，它在复数域中写作：
 
-$
+$$
  \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\big( q_m \cdot \overline{k_n} \big) 
-$
+$$
 
 将 $q_m$ 和 $k_n$ 代入：
 
-$
+$$
  \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( \big(q \cdot e^{im\theta}\big) \cdot \overline{\big(k \cdot e^{in\theta}\big)} \Big) 
-$
+$$
 
 由于共轭运算将指数取反（即 $\overline{e^{in\theta}} = e^{-in\theta}$），上式变为：
 
-$
+$$
  \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( q \cdot e^{im\theta} \cdot \overline{k} \cdot e^{-in\theta} \Big) 
-$
+$$
 
 合并指数部分：
 
-$
+$$
  \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( q \cdot \overline{k} \cdot e^{i(m-n)\theta} \Big) \tag{1} 
-$
+$$
 
 令 $S = q \cdot \overline{k}$（这是一个固定的复数，与位置无关），则最终结果为：
 
-$
+$$
  \langle \mathbf{q}_m, \mathbf{k}_n \rangle = \text{Re}\Big( S \cdot e^{i(m-n)\theta} \Big) \tag{2} 
-$
+$$
 
 这样可以得到结论：公式 (2) 中，位置信息仅以 $(m-n)$ 的差值形式出现，而不再含有单独的 $m$ 或 $n$。也就是说，**绝对位置被消除，内积只依赖于相对距离**——这也是旋转位置编码设计的核心
 
