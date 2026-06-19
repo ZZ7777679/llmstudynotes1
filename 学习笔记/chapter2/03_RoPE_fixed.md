@@ -310,7 +310,7 @@ $$
 
 $$
 \langle \mathbf{q}_m, \mathbf{k}_n \rangle
-= \mathrm{Re}\!\left(q \cdot \overline{k} \cdot e^{i(m-n)\theta}\right)
+= \mathrm{Re}\left(q \cdot \overline{k} \cdot e^{i(m-n)\theta}\right)
 \qquad \text{(1)}
 $$
 
@@ -318,7 +318,7 @@ $$
 
 $$
 \langle \mathbf{q}_m, \mathbf{k}_n \rangle
-= \mathrm{Re}\!\left(S \cdot e^{i(m-n)\theta}\right)
+= \mathrm{Re}\left(S \cdot e^{i(m-n)\theta}\right)
 \qquad \text{(2)}
 $$
 
